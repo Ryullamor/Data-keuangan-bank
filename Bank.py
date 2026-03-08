@@ -1,21 +1,13 @@
-import time
-import os
-
-# --- DATA SIMULASI     ---
+# --- DATA SIMULASI ---
 # Struktur data: Username: {password, saldo, riwayat}
 database_users = {
-    "ryuza": {"password": "6767", "saldo": 5000000, "riwayat": []},
-    "yuuki": {"password": "0101", "saldo": 1000000, "riwayat": []}
+    "ryuza": {"password": "6767", "saldo": 5000000, "riwayat": []}
 }
 
 # Variabel global untuk menyimpan user yang sedang login
 current_user = None
 
 # --- FUNGSI UTILITAS ---
-
-def clear_screen():
-    """Membersihkan layar terminal"""
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 def format_rupiah(angka):
     """Mengubah angka menjadi format mata uang Rupiah"""
@@ -39,7 +31,6 @@ def login():
         if database_users[username]["password"] == password:
             current_user = username
             print(f"\nLogin Berhasil! Selamat datang, {username}.")
-            time.sleep(1)
             return True
         else:
             print("Password salah!")
@@ -47,16 +38,16 @@ def login():
     else:
         print("Username gak ada ☹️.")
         return False
-
+    
 # --- CEK SALDO (READ) ---
 
 def cek_saldo():
     print("\n--- CEK SALDO ---")
     saldo = database_users[current_user]["saldo"]
-    print(f"Saldo saat ini: {format_rupiah(saldo)}")
+    print(f"Saldomu sekarang: {format_rupiah(saldo)}")
     input("\nTekan Enter buat balik...")
 
-# --- SETOR TUNAI (CREATE) ---
+# --- SETOR TUNAI (UPDATE) ---
 
 def setor_tunai():
     print("\n--- SETOR TUNAI ---")
@@ -78,12 +69,12 @@ def setor_tunai():
     
     input("\nTekan Enter buat balik...")
 
-# --- TARIK TUNAI (UPDATE/DELETE) ---
+# --- TARIK TUNAI (DELETE) ---
 
 def tarik_tunai():
     print("\n--- TARIK TUNAI ---")
     saldo = database_users[current_user]["saldo"]
-    print(f"Saldo Anda: {format_rupiah(saldo)}")
+    print(f"Saldomu: {format_rupiah(saldo)}")
     
     try:
         jumlah = int(input("Masukkan jumlah penarikan: "))
@@ -145,17 +136,13 @@ def menu_utama():
             lihat_riwayat()
         elif pilihan == '5':
             print("Makasih udh mampir 😛.")
-            time.sleep(1)
             break
         else:
             print("Pilihan gak valid ☹️.")
-            time.sleep(1)
-
 # --- FUNGSI UTAMA ---
 
 def main():
     while True:
-        clear_screen()
         tampilkan_header()
         print("1. Login")
         print("2. Keluar")
@@ -170,7 +157,7 @@ def main():
             break
         else:
             print("Pilihan gak valid ☹️.")
-            time.sleep(1)
+            input("Tekan Enter untuk kembali...")
 
 if __name__ == "__main__":
     main()
