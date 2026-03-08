@@ -157,7 +157,7 @@ def main():
             break
         else:
             print("Pilihan gak valid ☹️.")
-            input("Tekan Enter untuk kembali...")
+            input("Tekan Enter buat balik...")
 
 if __name__ == "__main__":
     main()
